@@ -1,0 +1,45 @@
+﻿@model WebEmpleados.Models.E_Empleado
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar Empleado</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-sm">
+        <h1 class="h1">Editar Empleado</h1>
+        <form method="post" action="/Empleado/GuardarCambios">
+            
+            <input type="hidden" name="IdEmpleado" value="@Model.IdEmpleado" />
+            <label class="form-label">Nombre</label>
+            <input type="text" name="Nombre" class="form-control" value="@Model.Nombre" />
+            <label class="form-label">Número de empleado</label>
+            <input type="text" name="NumeroEmpleado" class="form-control" value="@Model.NumeroEmpleado" />
+            <label class="form-label">Sueldo</label>
+            <input type="text" name="Sueldo" class="form-control" value="@Model.Sueldo" />
+            <label class="form-label">Fecha de nacimiento</label>
+            <input type="date" name="FechaNacimientos" class="form-control" value="@Model.FechaNacimientos.ToString("yyyy-MM-dd")" />
+
+            <label class="form-label">¿Es tiempo completo?</label>
+            <!-- Radio Buttons-->
+            <div>
+                <input type="radio" name="TiempoCompleto" value="true" @(Model.TiempoCompleto ? "checked" : "") />
+                <label class="">Si</label>
+            </div>
+            <div>
+                <input type="radio" name="TiempoCompleto" value="false" @(Model.TiempoCompleto ? "" : "checked") />
+                <label class="">No</label>
+            </div>
+            <br />
+            <input type="submit" value="Guardar Cambios" class="btn btn-success" />
+        </form>
+    </div>
+</body>
+</html>

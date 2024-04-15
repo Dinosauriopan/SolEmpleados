@@ -1,0 +1,75 @@
+﻿@using WebEmpleados.Models;
+@model List<E_Empleado>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Consulta</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container-sm">
+        <br />
+        <h1 class="h1">Empleados</h1>
+        <a href="/Empleado/IrAgregar" class="btn btn-outline-info mb-3">Nuevo Empleado</a>
+
+        @if (TempData["error"] != null)
+        {
+            <div class="alert alert-danger mt-3">@TempData["error"]</div>
+        }
+        else if (TempData["mensaje"] != null)
+        {
+            <div class="alert alert-success mt-3">@TempData["mensaje"]</div>
+        }
+
+        <!-- Formulario para el  buscador  -->
+              <form method="post" action="/Empleado/Buscar">
+                  <div class="row mb-3">
+                      <div class="col-6">
+                          <input type="text" name="textoBusqueda" class="form-control"/>
+                      </div>
+                      <div class="col-4">
+                          <input type="submit" name="buscar" value="Buscar" class="btn btn-primary"/>
+                      </div>
+                  </div>
+              </form>
+        
+        <!-- Tabla de datos empleados -->
+        <table class="table table-bordered text-center table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Numero Empleado</th>
+                    <th>Sueldo</th>
+                    <th>Fecha Naciemiento</th>
+                    <th>¿Tiempo Completo?</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (E_Empleado empleado in Model)
+                {
+                    <tr>
+                        <td>@empleado.IdEmpleado</td>
+                        <td>@empleado.Nombre</td>
+                        <td>@empleado.Edad</td>
+                        <td>@empleado.NumeroEmpleado</td>
+                        <td>@empleado.Sueldo.ToString("c")</td>
+                        <td>@empleado.FechaNacimientos.ToString("dd/MM/yyyy")</td>
+                        <td>@empleado.TiempoCompletoDescripcion</td>
+                        <td><a href="/Empleado/IrEditar?id=@empleado.IdEmpleado" class="btn btn-info">Editar Empleado</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
